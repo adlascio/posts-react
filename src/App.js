@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/examples/Home';
+import About from './components/examples/About';
+import Contact from './components/examples/Contact';
+import Navbar from './components/examples/Navbar';
+import Profile from './components/examples/Profile';
+import Profiles from './components/examples/Profiles';
+import { useState } from 'react';
 
 function App() {
+  const [obj, setObj] = useState({ a: 1, b: 2 });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path={'/'} element={<Home />} />
+        <Route path={'/about'} element={<About />} />
+        <Route path={'/contact'} element={<Contact />} />
+        <Route path={'/profiles'} element={<Profiles />} />
+        <Route path={'/profiles/:id'} element={<Profile obj={obj} />} />
+        <Route path={'*'} element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
+/*
+- /users - all users
+- /users/:id - show specific user by id
+- /posts - all posts
+- /posts/:id - specific post by id
+
+https://jsonplaceholder.typicode.com/
+*/
